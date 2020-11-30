@@ -1,5 +1,5 @@
 import React from "react";
-import jwtHandler from "../jwtHandler";
+import jwtHandler from "../../jwtHandler";
 export const Logout=({setIsLoggedIn}:any)=>{
     const handleClick=(evt:any)=>{
         evt.preventDefault();

@@ -1,8 +1,7 @@
-import {toast, ToastContainer} from "react-toastify";
+import {ToastContainer} from "react-toastify";
 import React, {useState} from "react";
-import jwtHandler from "../jwtHandler";
-import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
+import {login} from "../../api/adminAPI";
 
 export const Login = ({setIsLoggedIn, setIsSuperAdmin}: any) => {
 
@@ -18,21 +17,7 @@ export const Login = ({setIsLoggedIn, setIsSuperAdmin}: any) => {
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         const body = {"name": name, "password": password};
-        const config = {
-            headers: {
-                "Content-type": "application/json",
-            },
-        };
-        try {
-            const result = await axios.post('http://localhost:4000/admin/login', body, config);
-            jwtHandler.setToken(result.data.token);
-            setIsSuperAdmin(result.data.isSuperAdmin);
-            setIsLoggedIn(jwtHandler.getToken() !== null);
-        } catch (e) {
-            toast.error(e.response.data.msg);
-            setName("");
-            setPassword("");
-        }
+        await login(body,setIsSuperAdmin,setIsLoggedIn,setName,setPassword);
     }
 
     return <>

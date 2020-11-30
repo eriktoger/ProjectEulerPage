@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import axios from "axios";
-import jwtHandler from "../jwtHandler";
-import {toast, ToastContainer} from "react-toastify";
+import jwtHandler from "../../jwtHandler";
+import {ToastContainer} from "react-toastify";
+import {createAdmin} from "../../api/adminAPI";
 
 export const CreateAdmin = () => {
 
@@ -21,18 +21,8 @@ export const CreateAdmin = () => {
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         const body = {"name": name, "password": password, "isSuperAdmin": isSuperAdmin};
-        const config = {
-            headers: {
-                "Content-type": "application/json",
-                "x-auth-token": jwtHandler.getToken()
-            },
-        };
-        try {
-            const result = await axios.post("http://localhost:4000/admin", body, config);
-            toast.success(result.data.msg);
-        } catch (e) {
-            toast.error(e.response.data.msg);
-        }
+
+        await createAdmin(body);
     }
 
     return <>

@@ -8,7 +8,7 @@ import {About} from "./Common/about";
 import PageNotFound from "./Common/pagenotfound";
 import { Header } from "./Common/header";
 import { Menu } from "./Common/menu";
-import { Admin } from "./Common/admin";
+import { Admin } from "./Common/admin/admin";
 import styled from "styled-components";
 
 const StyledDiv = styled.div`

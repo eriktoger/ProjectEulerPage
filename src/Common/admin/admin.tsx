@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import jwtHandler from "../jwtHandler";
+import jwtHandler from "../../jwtHandler";
 import {Login} from "./login";
 
 import {Logout} from "./logout"

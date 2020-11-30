@@ -1,8 +1,8 @@
 import {toast, ToastContainer} from "react-toastify";
 import React, {useState} from "react";
-import jwtHandler from "../jwtHandler";
-import axios from "axios";
+import jwtHandler from "../../jwtHandler";
 import 'react-toastify/dist/ReactToastify.css';
+import {changePassword} from "../../api/adminAPI";
 
 export const ChangePassword = ()=>{
 
@@ -31,15 +31,7 @@ export const ChangePassword = ()=>{
                 "x-auth-token": jwtHandler.getToken()
             },
         };
-        try {
-            const result = await axios.patch('http://localhost:4000/admin', body, config);
-            toast.success(result.data.msg)
-        } catch (e) {
-            console.log("e ",e);
-            toast.error(e.response.data.msg);
-            setNewPassword("");
-            setRepeatPassword("");
-        }
+        await changePassword(body,config,setNewPassword,setRepeatPassword);
     }
 
     return <>
