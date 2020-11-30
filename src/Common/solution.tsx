@@ -9,7 +9,6 @@ const toggleSolution = (solution: boolean, setSolution: any): void => {
 interface Solution {
   answer: number;
   code: string;
-  htmlCode: string;
 }
 const Solution = (props: Solution) => {
   const [solution, setSolution] = useState(false);
@@ -19,7 +18,7 @@ const Solution = (props: Solution) => {
     Prism.languages.javascript,
     "typescript"
   );
-  console.log("html: ", html);
+
   return (
     <div>
       <h3>Solution</h3>
@@ -30,11 +29,7 @@ const Solution = (props: Solution) => {
       {solution && (
         <div>
           <p>Answer: {props.answer}</p>
-          <div
-            style={{
-              padding: "25px 50px"
-            }}
-          >
+          <div style={{}}>
             <p> Code:</p>
             <pre
               style={{

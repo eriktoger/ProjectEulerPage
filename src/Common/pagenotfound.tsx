@@ -1,11 +1,10 @@
 import React from "react";
-import mario from "../Pictures/mario.png";
-const { Img } = require("react-image");
+import mario from "./mario.png";
 const PageNotFound = () => {
   return (
     <div>
       <h1> Oops! Your page is another castle </h1>
-      <img src={mario}></img>
+      <img src={mario} alt={"mario!"}></img>
     </div>
   );
 };

@@ -14,13 +14,12 @@ const Hint = (props: Hint) => {
   let buttonText = hint ? "Hide hint" : "Show hint";
   return (
     <div>
-      <button onClick={() => toggleHint(hint, setHint)}>
-        {" "}
-        {buttonText} {props.index}{" "}
+      <button style={{ margin: 5 }} onClick={() => toggleHint(hint, setHint)}>
+        {buttonText} {props.index}
       </button>
       {hint && (
         <div>
-          <p>{props.hint} </p>
+          <p style={{ whiteSpace: "pre-line" }}>{props.hint} </p>
         </div>
       )}
     </div>
