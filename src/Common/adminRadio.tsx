@@ -1,21 +1,43 @@
 import React from "react";
+import styled from "styled-components";
 
-// Name
-// password
-// isSuperAdmin
-export const AdminRadio=( {isSuperAdmin,setRadioValue}:{isSuperAdmin:boolean,setRadioValue: React.Dispatch<React.SetStateAction<string>>})=>{
+
+const StyledDiv = styled.div`
+display: inline-block;
+  `;
+
+const StyledLabel = styled.label`
+display:inline-block;
+width: 175px;
+margin-top: 20px;
+  `;
+
+const StyledBr = styled.br`
+@media (max-width: 800px) {
+    display: none !important;
+
+}
+`;
+
+const RadioDiv = ({value,text,defaultChecked}:{value:string,text:string,defaultChecked:boolean}  )=>{
+    return <StyledDiv >
+        <input type="radio" value={`${value}`} defaultChecked={defaultChecked} name="task"/>
+        <StyledLabel>{`${text}`} </StyledLabel>
+    </StyledDiv>
+}
+
+export const AdminRadio = ({isSuperAdmin, setRadioValue}: { isSuperAdmin: boolean, setRadioValue: React.Dispatch<React.SetStateAction<string>> }) => {
     return <div onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setRadioValue(e.target.value)
     }}>
-        <input type="radio" value="change-password" defaultChecked name="task"/> Change Password
-
+        <RadioDiv value={"change-password"} text={"Change Password"} defaultChecked={true}/>
         {isSuperAdmin && <>
-          <input type="radio" value="handle-admins" name="task"/>Handle admins
-          <input type="radio" value="create-admin" name="task"/>Create new admin
+          <RadioDiv value={"handle-admins"} text={"Handle admins"} defaultChecked={false}/>
+          <RadioDiv value={"create-admin"} text={"Create new admin"} defaultChecked={false}/>
         </>}
-        <br></br>
-        <input type="radio" value="create-problem" name="task"/>Create new problem
-        <input type="radio" value="modify-problem" name="task"/>Modify problem
-        <input type="radio" value="delete-problem" name="task"/>Delete problem
+        <StyledBr/>
+        <RadioDiv value={"create-problem"} text={"Create new problem"} defaultChecked={false}/>
+        <RadioDiv value={"modify-problem"} text={"Modify problem"} defaultChecked={false}/>
+        <RadioDiv value={"delete-problem"} text={"Delete problem"} defaultChecked={false}/>
     </div>
 }
