@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
-const StyledUl = styled.li`
+const StyledUl = styled.ul`
 text-align: center;
 list-style-type: none;
   `;

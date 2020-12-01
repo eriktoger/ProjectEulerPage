@@ -10,7 +10,6 @@ const jwtHandler = () => {
         token = newToken;
         isLoggedIn = token !== null;
         isSuperAdmin = superAdmin;
-        console.log("ili: ", isLoggedIn);
     };
 
     const erase = () => {

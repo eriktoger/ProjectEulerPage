@@ -1,12 +1,19 @@
 import React, {useState} from "react";
 import jwtHandler from "../../jwtHandler";
 import {Login} from "./login";
-
 import {Logout} from "./logout"
 import {ChangePassword} from "./changePassword";
 import {HandleAdmins} from "./handleAdmins";
 import {CreateAdmin} from "./createAdmin";
 import {AdminRadio} from "./adminRadio";
+
+import styled from "styled-components";
+
+
+const StyledDiv= styled.div`
+  margin: auto;
+  width: 50%;
+`;
 
 export const Admin = () => {
     const {isLoggedIn, isSuperAdmin} = jwtHandler.get();
@@ -25,7 +32,7 @@ export const Admin = () => {
                 return <></>
         }
     }
-    return <>
+    return <StyledDiv>
         {showLogin && <>
           <Login setShowLogin={setShowLogin}/>
         </>
@@ -39,5 +46,5 @@ export const Admin = () => {
               <Logout setShowLogin={setShowLogin}/>
             </>
         }
-    </>
+    </StyledDiv>
 };
