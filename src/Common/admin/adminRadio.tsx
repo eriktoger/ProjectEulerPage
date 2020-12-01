@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const StyledDiv = styled.div`
 display: inline-block;
+white-space: nowrap;
   `;
 
 const StyledLabel = styled.label`
@@ -15,7 +16,6 @@ margin-top: 20px;
 const StyledBr = styled.br`
 @media (max-width: 800px) {
     display: none !important;
-
 }
 `;
 

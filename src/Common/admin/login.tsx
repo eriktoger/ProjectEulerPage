@@ -2,6 +2,13 @@ import {ToastContainer} from "react-toastify";
 import React, {useState} from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import {login} from "../../api/adminAPI";
+import styled from "styled-components";
+
+const StyledLabel = styled.label`
+display:inline-block;
+white-space: nowrap;
+margin: 5px;
+  `;
 
 export const Login = ({setShowLogin}: { setShowLogin: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
@@ -22,14 +29,14 @@ export const Login = ({setShowLogin}: { setShowLogin: React.Dispatch<React.SetSt
 
     return <>
         <form onSubmit={handleSubmit}>
-            <label>
+            <StyledLabel>
                 Name:
                 <input type="text" name="name" value={name} onChange={handleName}/>
-            </label>
-            <label>
+            </StyledLabel>
+            <StyledLabel>
                 Password:
                 <input type="password" name="password" value={password} onChange={handlePassword}/>
-            </label>
+            </StyledLabel>
             <input type="submit" value="Login"/>
         </form>
         <ToastContainer/>

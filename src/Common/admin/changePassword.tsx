@@ -13,6 +13,9 @@ const StyledP = styled.p`
   margin-left: 10px;
   display: inline;
   color: crimson;
+  @media (max-width: 1000px) {
+    display: block;
+}
   `;
 
 export const ChangePassword = () => {
