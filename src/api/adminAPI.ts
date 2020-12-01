@@ -17,6 +17,24 @@ export const changePassword = async (body: object, config: object, setNewPasswor
     }
 }
 
+export const togglePrivilege = async ( id:string, isSuperAdmin:boolean) => {
+    const config = {
+        headers: {
+            "Content-type": "application/json",
+            "x-auth-token": jwtHandler.get().token
+        },
+    };
+    try {
+        const result = await axios.patch(`${SERVER_URL}/admin/${id}`,{},config);
+        toast.success(result.data.msg)
+        return result.data.isSuperAdmin;
+    } catch (e) {
+        console.log("e ", e);
+        toast.error(e.response.data.msg);
+        return isSuperAdmin;
+    }
+}
+
 export const createAdmin = async (body: object) => {
     const config = {
         headers: {
@@ -32,7 +50,7 @@ export const createAdmin = async (body: object) => {
     }
 }
 
-export const deleteAdmin = async (setData: React.Dispatch<React.SetStateAction<never[]>>, id: string) => {
+export const deleteAdmin = async (id: string) => {
     const config = {
         headers: {
             "Content-type": "application/json",

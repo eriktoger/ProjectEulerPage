@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {AdminCard} from "./adminCard";
-import {deleteAdmin} from "../../api/adminAPI";
+import {deleteAdmin, togglePrivilege} from "../../api/adminAPI";
 import {fetchAdmins} from "../../api/adminAPI";
+import {ToastContainer} from "react-toastify";
 
 export interface AdminCardProps {
     _id: string
@@ -13,24 +14,28 @@ export interface AdminCardProps {
 export const HandleAdmins = () => {
     const [data, setData] = useState([]);
 
-    useEffect( () => {
+    useEffect(() => {
         const fetchData = async () => {
             await fetchAdmins(setData);
         };
         fetchData();
     }, [])
 
-    const handleDelete = async (id:string) => {
-
-        await deleteAdmin(setData, id);
+    const handleDelete = async (id: string) => {
+        await deleteAdmin(id);
         await fetchAdmins(setData);
+    }
+    const toggleSuperAdmin= async (id: string, isSuperAdmin: boolean) =>  {
+        isSuperAdmin = await togglePrivilege(id, isSuperAdmin);
+        await fetchAdmins(setData);
+        return isSuperAdmin;
     }
 
     return <>
-        <p>Handle admins</p>
         {data.map((admin: AdminCardProps) => {
-            return <AdminCard key={admin._id} admin={admin} handleDelete={handleDelete}/>
+            return <AdminCard key={admin._id} admin={admin} toggleSuperAdmin={toggleSuperAdmin} handleDelete={handleDelete}/>
         })}
+        <ToastContainer/>
     </>;
 
 }

@@ -1,6 +1,14 @@
 import React, {useState} from "react";
 import {ToastContainer} from "react-toastify";
 import {createAdmin} from "../../api/adminAPI";
+import styled from "styled-components";
+
+
+const StyledLabel = styled.label`
+display:inline-block;
+white-space: nowrap;
+margin: 5px;
+  `;
 
 export const CreateAdmin = () => {
 
@@ -20,25 +28,23 @@ export const CreateAdmin = () => {
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         const body = {"name": name, "password": password, "isSuperAdmin": isSuperAdmin};
-
         await createAdmin(body);
     }
 
     return <>
-        <p>Create new admins</p>
         <form onSubmit={handleSubmit}>
-            <label>
+            <StyledLabel>
                 Name:
                 <input type="text" name="name" value={name} onChange={handleName}/>
-            </label>
-            <label>
+            </StyledLabel>
+            <StyledLabel>
                 Password:
                 <input type="text" name="password" value={password} onChange={handlePassword}/>
-            </label>
-            <label>
+            </StyledLabel>
+            <StyledLabel>
                 Is super admin:
                 <input type="checkbox" name="isSuperAdmin" onClick={handleIsSuperAdmin}/>
-            </label>
+            </StyledLabel>
             <p/>
             <input type="submit" value="Create"/>
         </form>

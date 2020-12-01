@@ -26,15 +26,21 @@ const Confirm = ({id, handleDelete, setShowModal}: { id: string, handleDelete: (
     </div>
 }
 
-export const AdminCard = ({admin, handleDelete}: { admin: AdminCardProps, handleDelete: (id: string) => void }) => {
+export const AdminCard = ({admin, toggleSuperAdmin, handleDelete}: { admin: AdminCardProps, toggleSuperAdmin: (id: string, isSuperAdmin: boolean) => Promise<boolean>, handleDelete: (id: string) => void }) => {
     const [showModal, setShowModal] = useState(false);
+    const [isSuperAdmin, setIsSuperAdmin] = useState(admin.isSuperAdmin);
+
+    const handleToggle = async () => {
+        setIsSuperAdmin(await toggleSuperAdmin(admin._id, isSuperAdmin));
+    }
+
     return (
         <StyledDiv>
             <p> Name: {admin.name}</p>
             <p> Created at: {admin.createdAt}</p>
-            <p> Is super admin: {admin.isSuperAdmin ? "True" : "False"}</p>
+            <p> Is super admin: {isSuperAdmin ? "True" : "False"}</p>
             <button onClick={() => setShowModal(!showModal)}>Delete</button>
-            <button>{admin.isSuperAdmin ? "Make Admin" : "Make Super Admin"}</button>
+            <button onClick={handleToggle}>{isSuperAdmin ? "Make Admin" : "Make Super Admin"}</button>
             {showModal && <Confirm id={admin._id} handleDelete={handleDelete} setShowModal={setShowModal}/>}
         </StyledDiv>)
 }
