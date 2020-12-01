@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import jwtHandler from "../../jwtHandler";
 import {ToastContainer} from "react-toastify";
 import {createAdmin} from "../../api/adminAPI";
 

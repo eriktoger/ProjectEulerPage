@@ -21,7 +21,7 @@ export const createAdmin = async (body: object) => {
     const config = {
         headers: {
             "Content-type": "application/json",
-            "x-auth-token": jwtHandler.getToken()
+            "x-auth-token": jwtHandler.get().token
         },
     };
     try {
@@ -36,7 +36,7 @@ export const deleteAdmin = async (setData: React.Dispatch<React.SetStateAction<n
     const config = {
         headers: {
             "Content-type": "application/json",
-            "x-auth-token": jwtHandler.getToken()
+            "x-auth-token": jwtHandler.get().token
         },
     };
     try {
@@ -52,7 +52,7 @@ export const fetchAdmins = async (setData: React.Dispatch<React.SetStateAction<n
     const config = {
         headers: {
             "Content-type": "application/json",
-            "x-auth-token": jwtHandler.getToken()
+            "x-auth-token": jwtHandler.get().token
         },
     };
     const result = await axios.get(
@@ -67,15 +67,13 @@ const config = {
 };
 
 export const login = async (body: object,
-                            setIsSuperAdmin: React.Dispatch<React.SetStateAction<string>>,
-                            setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
+                            setShowLogin: React.Dispatch<React.SetStateAction<boolean>>,
                             setName: React.Dispatch<React.SetStateAction<string>>,
                             setPassword: React.Dispatch<React.SetStateAction<string>>) => {
     try {
         const result = await axios.post(`${SERVER_URL}/admin/login`, body, config);
-        jwtHandler.setToken(result.data.token);
-        setIsSuperAdmin(result.data.isSuperAdmin);
-        setIsLoggedIn(jwtHandler.getToken() !== null);
+        jwtHandler.set(result.data.token,result.data.isSuperAdmin);
+        setShowLogin(result.data.token === null);
     } catch (e) {
         toast.error(e.response.data.msg);
         setName("");

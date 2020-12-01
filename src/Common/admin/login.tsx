@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import {login} from "../../api/adminAPI";
 
-export const Login = ({setIsLoggedIn, setIsSuperAdmin}: any) => {
+export const Login = ({setShowLogin}: { setShowLogin: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
     const [name, setName] = useState("kire6");
     const [password, setPassword] = useState("kire6");
@@ -17,7 +17,7 @@ export const Login = ({setIsLoggedIn, setIsSuperAdmin}: any) => {
     const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         const body = {"name": name, "password": password};
-        await login(body,setIsSuperAdmin,setIsLoggedIn,setName,setPassword);
+        await login(body, setShowLogin, setName, setPassword);
     }
 
     return <>

@@ -19,8 +19,8 @@ const StyledBr = styled.br`
 }
 `;
 
-const RadioDiv = ({value,text,defaultChecked}:{value:string,text:string,defaultChecked:boolean}  )=>{
-    return <StyledDiv >
+const RadioDiv = ({value, text, defaultChecked}: { value: string, text: string, defaultChecked: boolean }) => {
+    return <StyledDiv>
         <input type="radio" value={`${value}`} defaultChecked={defaultChecked} name="task"/>
         <StyledLabel>{`${text}`} </StyledLabel>
     </StyledDiv>

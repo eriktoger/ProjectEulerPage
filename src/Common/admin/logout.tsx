@@ -1,10 +1,11 @@
 import React from "react";
 import jwtHandler from "../../jwtHandler";
-export const Logout=({setIsLoggedIn}:any)=>{
-    const handleClick=(evt:any)=>{
+
+export const Logout = ({setShowLogin}: { setShowLogin: React.Dispatch<React.SetStateAction<boolean>> }) => {
+    const handleClick = (evt: any) => {
         evt.preventDefault();
-        setIsLoggedIn(false);
-        jwtHandler.eraseToken();
+        jwtHandler.erase();
+        setShowLogin(true);
     }
     return <button onClick={handleClick}> Log out</button>
 }

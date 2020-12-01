@@ -28,7 +28,7 @@ export const ChangePassword = ()=>{
         const config = {
             headers: {
                 "Content-type": "application/json",
-                "x-auth-token": jwtHandler.getToken()
+                "x-auth-token": jwtHandler.get().token
             },
         };
         await changePassword(body,config,setNewPassword,setRepeatPassword);

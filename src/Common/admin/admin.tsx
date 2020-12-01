@@ -9,9 +9,9 @@ import {CreateAdmin} from "./createAdmin";
 import {AdminRadio} from "./adminRadio";
 
 export const Admin = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(jwtHandler.getToken() !== null);
-    const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+    const {isLoggedIn, isSuperAdmin} = jwtHandler.get();
     const [radioValue, setRadioValue] = useState("change-password");
+    const [showLogin, setShowLogin] = useState(!isLoggedIn);
 
     const showContent = (value: string) => {
         switch (value) {
@@ -25,19 +25,18 @@ export const Admin = () => {
                 return <></>
         }
     }
-
     return <>
-        {!isLoggedIn && <>
-          <Login setIsLoggedIn={setIsLoggedIn} setIsSuperAdmin={setIsSuperAdmin}/>
+        {showLogin && <>
+          <Login setShowLogin={setShowLogin}/>
         </>
         }
         {
-            isLoggedIn &&
+            !showLogin &&
             <>
-                <AdminRadio isSuperAdmin={isSuperAdmin} setRadioValue={setRadioValue}/>
+              <AdminRadio isSuperAdmin={isSuperAdmin} setRadioValue={setRadioValue}/>
                 {showContent(radioValue)}
               <p/>
-              <Logout setIsLoggedIn={setIsLoggedIn}/>
+              <Logout setShowLogin={setShowLogin}/>
             </>
         }
     </>
